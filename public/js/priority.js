@@ -3,11 +3,11 @@
 var t = TrelloPowerUp.iframe();
 
 // Elements with IDs are available as properties of `window`.
-window.estimate.addEventListener("submit", function(event) {
+window.priority.addEventListener("submit", function(event) {
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
   return t
-    .set("card", "shared", "estimate", window.estimateSize.value)
+    .set("card", "shared", "priority", window.priorityDropDown.value)
     .then(function() {
       t.closePopup();
     });
@@ -15,11 +15,11 @@ window.estimate.addEventListener("submit", function(event) {
 
 t.render(function() {
   return t
-    .get("card", "shared", "estimate")
-    .then(function(estimate) {
-      window.estimateSize.value = estimate;
+    .get("card", "shared", "priority")
+    .then(function(priority ) {
+      window.priorityDropDown.value = priority;
     })
     .then(function() {
-      t.sizeTo("#estimate").done();
+      t.sizeTo("#priority").done();
     });
 });

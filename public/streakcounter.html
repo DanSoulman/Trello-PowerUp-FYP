@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css" />
+    <style>
+      select {
+        height: 30px;
+      }
+    </style>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <form id="streakCounter">
+      <label for="streakCounter">
+        Streak Counter: How many times has this task been completed?
+      </label>
+      <script type="text/javascript">
+        //Document.ready{call count.html(value)}
+        if (count == undefined || count == NaN) {
+          var count = 0;
+        }
+        function onClickInc() {
+          count += 1;
+          document.getElementById("count").innerHTML = count;
+        }
+        function onClickDec() {
+          count -= 1;
+          document.getElementById("count").innerHTML = count;
+        }
+        function displayCurrent() {
+          count -=0;
+          document.getElementById("count").innerHTML = count;
+        }
+      </script>
+      <button id="show" type="button" onclick="displayCurrent()">
+        Show Current Count!
+      </button>
+      <button id="inc" type="button" onclick="onClickInc()">
+        Task Completed!
+      </button>
+      <button id="dec" type="button" onclick="onClickDec()">
+        Remove Task From Total!
+      </button>
+
+      <p>
+        Number of times task has been completed: <span id="count"></span>
+        <br />
+        <button type="submit" class="mod-primary">Save</button>
+      </p>
+    </form>
+    <script src="./js/streakcounter.js"></script>
+  </body>
+</html>
