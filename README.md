@@ -1,2 +1,2 @@
-# FYP-Prototype
-Prototype to prove it's doable
+# FYP - Optimizing Project Management Tool Trello For Agile Development
+WIP. 
