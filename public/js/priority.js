@@ -1,6 +1,8 @@
 /* global TrelloPowerUp */
-
+var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
+
+
 
 // Elements with IDs are available as properties of `window`.
 window.priority.addEventListener("submit", function(event) {

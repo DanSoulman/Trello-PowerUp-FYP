@@ -10,10 +10,10 @@ var WHITE_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182";
 
 TrelloPowerUp.initialize({
-  /*||--------------------------------------||
-    ||  C  A  R  D   B  U  T  T  O  N  S    ||
-    ||Appear on the right hand side of cards||
-    ||--------------------------------------||*/
+  /*||----------------------------------------||
+    ||  C  A  R  D     B  U  T  T  O  N  S    ||
+    ||Appear on the right hand side of cards  ||
+    ||----------------------------------------||*/
   "card-buttons": function(t, options) {
     return [
       {
@@ -47,7 +47,7 @@ TrelloPowerUp.initialize({
         callback: function(t) {
           return t.popup({
             title: "Start Date",
-            url: "https://trello-prototype.glitch.me/startdate.js"
+            url: "https://trello-prototype.glitch.me/startdate.html"
           });
         }
       },
@@ -86,35 +86,86 @@ TrelloPowerUp.initialize({
       }
     ];
   },
-
+  /*--------------------------------------------//
+  //P  R  I  O  R  I  T  Y     S  O  R  T  E  R //
+  //-------------------------------------------*/
+  // "list-sorters": function(t, options) {
+  //   return t.get("card", "shared", "priority").then(function(priority){
+  //   return t.list("name", "id").then(function(list) {
+  //     return [
+  //       {
+  //         text: "Sort by Priority",
+  //         callback: function(t, opts) {
+  //           console.log("Starting sort...")
+  //           // Trello will call this if the user clicks on this sort
+  //           // opts.cards contains all card objects in the list
+  //           var sortedCards = opts.cards.sort(function(a, b) {
+  //             console.log(a.priority);
+//               if (
+//                 (a.priority == "High Priority" && b.priority == null) ||
+//                 (a.priority == "Medium Priority" && b.priority == null) ||
+//                 (a.priority == "Low Priority" && b.priority == null) ||
+//                 (a.priority == "High Priority" && b.priority == "Medium Priority") ||
+//                 (a.priority == "High Priority" && b.priority == "Low Priority") ||
+//                 (a.priority == "Medium Priority" && b.priority == "Low Priority")
+//                 ) 
+//               { 
+//                 return 1;
+//               }
+              
+//               else if (
+//                 (b.priority == "High Priority" && a.priority == null)               ||
+//                 (b.priority == "Medium Priority" && a.priority == null)             ||
+//                 (b.priority == "Low Priority" && a.priority == null)                ||
+//                 (b.priority == "High Priority" && a.priority == "Medium Priority")  ||
+//                 (b.priority == "High Priority" && a.priority == "Low Priority")     ||
+//                 (b.priority == "Medium Priority" && a.priority == "Low Priority")
+//               ) 
+//               {
+//                 return -1;
+//               } 
+//               else {
+//                 return 0;
+//               }
+//               console.log("Finished sort.")
+//             });
+    //         });
+    //         return {
+    //           sortedIds: sortedCards.map(function(c) {
+    //             return c.id;
+    //           })
+    //         };
+    //       }
+    //     }
+    //   ];
+    // });
+    //})
+//  },
   /*-------------------------------------------------/
   /            C  A  R  D    B  A  D  G  E  S        /        
   /       The ones that appear on the dashboard      /
   /--------------------------------------------------*/
   "card-badges": function(t, options) {
-    return t.get("card", "shared", "priority").then(function(priority, None) {
-      return [
+    return t.getAll().then(function(data) {
+      var card = data.card.shared;
+      //if(data.card.shared.priority!= null){
+      //  console.log(data.card.shared);
+      //}
+       return [
         {
-          icon: priority ? GREY_ROCKET_ICON : null,
-          text: priority || "",
-          color: priority ? "green" : null
-        }
+          icon: card.priority ? GREY_ROCKET_ICON : null,
+          text: card.priority || "",
+          color: card.priority ? "green" : null
+        },
+         {
+            icon: card.taskpoint ? GREY_ROCKET_ICON : null,
+            text: card.taskpoint || "",
+            color: card.taskpoint ? "green" : null
+          }
       ];
     });
-  //   return t.get("card", "shared", "taskpoint").then(function(None, taskpoint) {
-  //     //Check if this is how you do this
-  //     return [
-  //       {
-  //         icon: taskpoint ? GREY_ROCKET_ICON : null,
-  //         text: taskpoint || "",
-  //         color: taskpoint ? "green" : null
-  //       }
-  //     ];
-  //   });
-  // },
-  },
+  }
 
-  
   /*-------------------------------------------------|
   |    C  A  R  D   D E T A I L   B  A  D  G  E  S   |        
   |   The ones that appear on the top of a card      |
@@ -136,22 +187,22 @@ TrelloPowerUp.initialize({
   //         }
   //       }
   //     ];
-  //   }); 
-    // return t.get("card", "shared", "taskpoint").then(function(taskpoint) {
-    //   return [
-    //     {
-    //       title: "Task Point",
-    //       text: taskpoint || "Set Task Estimate?",
-    //       color: taskpoint ? null : "blue",
-    //       callback: function(t) {
-    //         return t.popup({
-    //           title: "Task Point",
-    //           url: "https://trello-prototype.glitch.me/taskpoint.html",
-    //           target: "Trello Landing Page"
-    //         });
-    //       }
-    //     }
-    //   ];
-    // });
-//   }
- });
+  //   });
+  // return t.get("card", "shared", "taskpoint").then(function(taskpoint) {
+  //   return [
+  //     {
+  //       title: "Task Point",
+  //       text: taskpoint || "Set Task Estimate?",
+  //       color: taskpoint ? null : "blue",
+  //       callback: function(t) {
+  //         return t.popup({
+  //           title: "Task Point",
+  //           url: "https://trello-prototype.glitch.me/taskpoint.html",
+  //           target: "Trello Landing Page"
+  //         });
+  //       }
+  //     }
+  //   ];
+  // });
+  //   }
+});
