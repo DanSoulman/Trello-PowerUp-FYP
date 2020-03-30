@@ -89,55 +89,55 @@ TrelloPowerUp.initialize({
   /*--------------------------------------------//
   //P  R  I  O  R  I  T  Y     S  O  R  T  E  R //
   //-------------------------------------------*/
-  "list-sorters": function(t, options) {
-    return t.list("name", "id").then(function(list) {
-              return [
-                {
-                  text: "Sort by Priority",
-                  callback: function(t, opts) {
-                    console.log(opts.cards);
-                    // Trello will call this if the user clicks on this sort
-                    // opts.cards contains all card objects in the list
-                    var sortedCards = opts.cards.sort(function(a, b) {
-                     // console.log(a);
-                      if (
-                        (a.priority == "High Priority" && b.priority == null) ||
-                        (a.priority == "Medium Priority" && b.priority == null) ||
-                        (a.priority == "Low Priority" && b.priority == null) ||
-                        (a.priority == "High Priority" && b.priority == "Medium Priority") ||
-                        (a.priority == "High Priority" && b.priority == "Low Priority") ||
-                        (a.priority == "Medium Priority" && b.priority == "Low Priority")
-                        )
-                      {
-                        return 1;
-                      }
+//   "list-sorters": function(t, options) {
+//     return t.list("name", "id").then(function(list) {
+//               return [
+//                 {
+//                   text: "Sort by Priority",
+//                   callback: function(t, opts) {
+//                     console.log(opts.cards);
+//                     // Trello will call this if the user clicks on this sort
+//                     // opts.cards contains all card objects in the list
+//                     var sortedCards = opts.cards.sort(function(a, b) {
+//                      // console.log(a);
+//                       if (
+//                         (a.priority == "High Priority" && b.priority == null) ||
+//                         (a.priority == "Medium Priority" && b.priority == null) ||
+//                         (a.priority == "Low Priority" && b.priority == null) ||
+//                         (a.priority == "High Priority" && b.priority == "Medium Priority") ||
+//                         (a.priority == "High Priority" && b.priority == "Low Priority") ||
+//                         (a.priority == "Medium Priority" && b.priority == "Low Priority")
+//                         )
+//                       {
+//                         return 1;
+//                       }
 
-                      else if (
-                        (b.priority == "High Priority" && a.priority == null)               ||
-                        (b.priority == "Medium Priority" && a.priority == null)             ||
-                        (b.priority == "Low Priority" && a.priority == null)                ||
-                        (b.priority == "High Priority" && a.priority == "Medium Priority")  ||
-                        (b.priority == "High Priority" && a.priority == "Low Priority")     ||
-                        (b.priority == "Medium Priority" && a.priority == "Low Priority")
-                      )
-                      {
-                        return -1;
-                      }
-                      else {
-                        return 0;
-                      }
-                      console.log("Finished sort.")
-                    });
-                    return {
-                      sortedIds: sortedCards.map(function(c) {
-                        return c.id;
-                      })
-                    };
-                  }
-                }
-              ];
-    });
-  },
+//                       else if (
+//                         (b.priority == "High Priority" && a.priority == null)               ||
+//                         (b.priority == "Medium Priority" && a.priority == null)             ||
+//                         (b.priority == "Low Priority" && a.priority == null)                ||
+//                         (b.priority == "High Priority" && a.priority == "Medium Priority")  ||
+//                         (b.priority == "High Priority" && a.priority == "Low Priority")     ||
+//                         (b.priority == "Medium Priority" && a.priority == "Low Priority")
+//                       )
+//                       {
+//                         return -1;
+//                       }
+//                       else {
+//                         return 0;
+//                       }
+//                       console.log("Finished sort.")
+//                     });
+//                     return {
+//                       sortedIds: sortedCards.map(function(c) {
+//                         return c.id;
+//                       })
+//                     };
+//                   }
+//                 }
+//               ];
+//     });
+//   },
   /*-------------------------------------------------/
   /            C  A  R  D    B  A  D  G  E  S        /        
   /       The ones that appear on the dashboard      /
@@ -161,7 +161,12 @@ TrelloPowerUp.initialize({
           icon: card.count ? GREY_ROCKET_ICON : null,
           text: card.count ? "Counter: " + card.count : "", //Maybe change if I want it to be able to display 0
           color: card.count ? "green" : null
-        }
+        },
+        {
+          icon: card.startdate ? GREY_ROCKET_ICON : null,
+          text: card.startdate ? "Starts: " + card.startdate : "", //Maybe change if I want it to be able to display 0
+          color: card.startdate ? "green" : null
+        },
       ];
     });
   },
@@ -211,7 +216,19 @@ TrelloPowerUp.initialize({
               target: "Trello Landing Page"
             });
           }
-        } //,
+        },
+        {
+          title: "Start Date",
+          text: card.startdate || "Set Start Date?",
+          color: card.startdate ? null : "blue",
+          callback: function(t) {
+            return t.popup({
+              title: "Start Date",
+              url: "https://trello-prototype.glitch.me/startdate.html",
+              target: "Trello Landing Page"
+            });
+          }
+        }
       ];
     });
   }
