@@ -8,7 +8,14 @@ var GREY_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717";
 var WHITE_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182";
-
+var CLOCK_ICON = 
+    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FClock%204.2.png?v=1586190859641";
+var POINT_ICON = 
+    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FTaskPoint.png?v=1586192665199";
+var PRIORITY_ICON = 
+    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2Fpriority.png?v=1586192855045";
+var COUNTER_ICON =
+    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FCounter.png?v=1586193416033";
 TrelloPowerUp.initialize({
   /*||----------------------------------------||
     ||  C  A  R  D     B  U  T  T  O  N  S    ||
@@ -18,7 +25,7 @@ TrelloPowerUp.initialize({
     return [
       {
         //Priority Button
-        icon: BLACK_ROCKET_ICON,
+        icon: PRIORITY_ICON,
         text: "Set Priority",
         callback: function(t) {
           return t.popup({
@@ -30,7 +37,7 @@ TrelloPowerUp.initialize({
 
       {
         //Task Estimate Button
-        icon: BLACK_ROCKET_ICON,
+        icon: POINT_ICON,
         text: "Add Task Estimate",
         callback: function(t) {
           return t.popup({
@@ -42,7 +49,7 @@ TrelloPowerUp.initialize({
 
       {
         //Start Date Button
-        icon: BLACK_ROCKET_ICON,
+        icon: CLOCK_ICON,
         text: "Set Start Date",
         callback: function(t) {
           return t.popup({
@@ -53,7 +60,7 @@ TrelloPowerUp.initialize({
       },
       {
         //Streak Counter Button
-        icon: BLACK_ROCKET_ICON,
+        icon: COUNTER_ICON,
         text: "Add Streak Counter",
         callback: function(t) {
           return t.popup({
@@ -148,23 +155,23 @@ TrelloPowerUp.initialize({
 
       return [
         {
-          icon: card.priority ? GREY_ROCKET_ICON : null,
+          icon: card.priority ? PRIORITY_ICON : null,
           text: card.priority || "",
           color: card.priority ? "green" : null
         },
         {
-          icon: card.taskpoint ? GREY_ROCKET_ICON : null,
+          icon: card.taskpoint ? POINT_ICON : null,
           text: card.taskpoint || "",
           color: card.taskpoint ? "green" : null
         },
         {
-          icon: card.count ? GREY_ROCKET_ICON : null,
-          text: card.count ? "Counter: " + card.count : "", //Maybe change if I want it to be able to display 0
+          icon: card.count ? COUNTER_ICON : null,
+          text: card.count ? "Counter: " + card.count : "",
           color: card.count ? "green" : null
         },
         {
-          icon: card.startdate ? GREY_ROCKET_ICON : null,
-          text: card.startdate ? "Starts: " + card.startdate : "", //Maybe change if I want it to be able to display 0
+          icon: card.startdate ? CLOCK_ICON : null,
+          text: card.startdate ? "Starts: " + card.startdate : "", 
           color: card.startdate ? "green" : null
         },
       ];
@@ -207,8 +214,8 @@ TrelloPowerUp.initialize({
         },
         {
           title: "Streak Counter",
-          text: card.count || "Count Repetitive Task?",
-          color: card.taskpoint ? null : "blue",
+          text: card.count==undefined ?  "Count: 0" : ("Count: "+ card.count),
+          color: null,
           callback: function(t) {
             return t.popup({
               title: "Streak Counter",

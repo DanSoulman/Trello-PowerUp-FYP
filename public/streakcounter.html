@@ -12,6 +12,7 @@
     <form id="streakCounter">
       <label for="streakCounter">
         Streak Counter: How many times has this task been completed?
+        <br> Click multiple times to increment.
       </label>
       <script type="text/javascript">
         //Document.ready{call count.html(value)}
@@ -40,12 +41,10 @@
       <button id="dec" type="button" onclick="onClickDec()">
         Remove Task From Total!
       </button>
-
-      <p>
+      <label>
         Number of times task has been completed: <span id="count"></span>
-        <br />
+      </label>
         <button type="submit" class="mod-primary">Save</button>
-      </p>
     </form>
     <script src="./js/streakcounter.js"></script>
   </body>
