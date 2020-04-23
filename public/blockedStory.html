@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css" />
+    <style>
+      select {
+        height: 30px;
+      }
+    </style>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <form id="blockedStory">
+      <label for="blockedStory">Blocked Story: Is there a task that must be completed before this task?</label> <!---Explaination-->
+      <!---Cards Name-->
+      <label for="cardName">Please Add Name of Blocking Card</label>
+      <input id="cardName" type="text"/>
+      <!---Link-->
+      <label for="cardLink">Please Add Blocking Card Link</label>
+      <input id="cardLink" type="text"/>
+      <button type="submit" class="mod-primary">Save</button>
+    </form>
+    <script src="./js/blockedStory.js"></script>
+  </body>
+</html>

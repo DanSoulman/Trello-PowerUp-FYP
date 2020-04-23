@@ -1,5 +1,4 @@
 /* global TrelloPowerUp */
-
 var t = TrelloPowerUp.iframe();
 
 // Elements with IDs are available as properties of `window`.
@@ -19,7 +18,8 @@ t.render(function() {
     .then(function(taskpoint) {
       window.taskpointTextfield.value = taskpoint;
     })
+    //Sizes window to allow all buttons to be seen at once
     .then(function() {
-      t.sizeTo("#taskpoint").done();
+      t.sizeTo(document.body).done();
     });
 });

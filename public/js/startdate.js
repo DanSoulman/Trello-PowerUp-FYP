@@ -7,7 +7,8 @@ window.startdate.addEventListener("submit", function(event) {
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
   return t
-    .set("card", "shared", "startdate", window.startDateTextfield.value)
+  //This sets the start date either the correct date or the error message if it was invalid. 
+    .set("card", "shared", "startdate", validateDate(window.startDateTextfield.value))
     .then(function() {
       t.closePopup();
     });
@@ -21,9 +22,11 @@ t.render(function() {
       window.startDateTextfield.value = startdate;
     })
     .then(function() {
-      t.sizeTo("#startdate").done();
+      //Sizes window to allow all buttons to be seen at once
+      t.sizeTo(document.body).done();
     });
 });
+
 // Takes in the date and makes sure it's valid. 
 function validateDate(date) {
   var error = ""; //This accounts for any errors
@@ -76,6 +79,7 @@ function validateDate(date) {
   if (error == "") {
     return date;
   } else {
-    return error;
+    date = error;
+    return date;
   }
 }

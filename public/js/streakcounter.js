@@ -20,7 +20,8 @@ t.render(function() {
     .then(function(count) {
       window.count = count; //tied to it incrementing? 
       })
+    //Sizes window to allow all buttons to be seen at once
     .then(function() {
-      t.sizeTo("#streakCounter").done();
+      t.sizeTo(document.body).done();
     });
 });

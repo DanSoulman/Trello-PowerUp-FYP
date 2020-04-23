@@ -2,20 +2,25 @@
 
 var Promise = TrelloPowerUp.Promise;
 
+/*||---------||
+  ||I C O N S|| 
+  ||---------||*/
 var BLACK_ROCKET_ICON =
   "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421";
 var GREY_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717";
 var WHITE_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182";
-var CLOCK_ICON = 
-    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FClock%204.2.png?v=1586190859641";
-var POINT_ICON = 
-    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FTaskPoint.png?v=1586192665199";
-var PRIORITY_ICON = 
-    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2Fpriority.png?v=1586192855045";
+var CLOCK_ICON =
+  "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FClock%204.2.png?v=1586190859641";
+var POINT_ICON =
+  "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FTaskPoint.png?v=1586192665199";
+var PRIORITY_ICON =
+  "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2Fpriority.png?v=1586192855045";
 var COUNTER_ICON =
-    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FCounter.png?v=1586193416033";
+  "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FCounter.png?v=1586193416033";
+var BLOCKED_ICON =
+    "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FBlocked.png?v=1586797613534";
 TrelloPowerUp.initialize({
   /*||----------------------------------------||
     ||  C  A  R  D     B  U  T  T  O  N  S    ||
@@ -71,80 +76,19 @@ TrelloPowerUp.initialize({
       },
       {
         //Set Story as Blocked Button
-        icon: BLACK_ROCKET_ICON,
+        icon: BLOCKED_ICON,
         text: "Set Card as Blocked",
         callback: function(t) {
           return t.popup({
             title: "Blocked Card",
-            url: "https://trello-prototype.glitch.me/index.html"
-          });
-        }
-      },
-      {
-        //Set Story as Epic Button
-        icon: BLACK_ROCKET_ICON,
-        text: "Set Card as an Epic",
-        callback: function(t) {
-          return t.popup({
-            title: "Epic Task",
-            url: "https://trello-prototype.glitch.me/index.html"
+            url: "https://trello-prototype.glitch.me/blockedStory.html"
           });
         }
       }
     ];
   },
-  /*--------------------------------------------//
-  //P  R  I  O  R  I  T  Y     S  O  R  T  E  R //
-  //-------------------------------------------*/
-//   "list-sorters": function(t, options) {
-//     return t.list("name", "id").then(function(list) {
-//               return [
-//                 {
-//                   text: "Sort by Priority",
-//                   callback: function(t, opts) {
-//                     console.log(opts.cards);
-//                     // Trello will call this if the user clicks on this sort
-//                     // opts.cards contains all card objects in the list
-//                     var sortedCards = opts.cards.sort(function(a, b) {
-//                      // console.log(a);
-//                       if (
-//                         (a.priority == "High Priority" && b.priority == null) ||
-//                         (a.priority == "Medium Priority" && b.priority == null) ||
-//                         (a.priority == "Low Priority" && b.priority == null) ||
-//                         (a.priority == "High Priority" && b.priority == "Medium Priority") ||
-//                         (a.priority == "High Priority" && b.priority == "Low Priority") ||
-//                         (a.priority == "Medium Priority" && b.priority == "Low Priority")
-//                         )
-//                       {
-//                         return 1;
-//                       }
-
-//                       else if (
-//                         (b.priority == "High Priority" && a.priority == null)               ||
-//                         (b.priority == "Medium Priority" && a.priority == null)             ||
-//                         (b.priority == "Low Priority" && a.priority == null)                ||
-//                         (b.priority == "High Priority" && a.priority == "Medium Priority")  ||
-//                         (b.priority == "High Priority" && a.priority == "Low Priority")     ||
-//                         (b.priority == "Medium Priority" && a.priority == "Low Priority")
-//                       )
-//                       {
-//                         return -1;
-//                       }
-//                       else {
-//                         return 0;
-//                       }
-//                       console.log("Finished sort.")
-//                     });
-//                     return {
-//                       sortedIds: sortedCards.map(function(c) {
-//                         return c.id;
-//                       })
-//                     };
-//                   }
-//                 }
-//               ];
-//     });
-//   },
+  
+  
   /*-------------------------------------------------/
   /            C  A  R  D    B  A  D  G  E  S        /        
   /       The ones that appear on the dashboard      /
@@ -171,9 +115,14 @@ TrelloPowerUp.initialize({
         },
         {
           icon: card.startdate ? CLOCK_ICON : null,
-          text: card.startdate ? "Starts: " + card.startdate : "", 
+          text: card.startdate ? "Starts: " + card.startdate : "",
           color: card.startdate ? "green" : null
         },
+        {
+          icon: card.cardName ? BLOCKED_ICON : null,
+          text: card.cardName ? "Blocked By: " + card.cardName : "",
+          color: card.cardName ? "red" : null
+        }
       ];
     });
   },
@@ -186,7 +135,7 @@ TrelloPowerUp.initialize({
   "card-detail-badges": function(t, options) {
     return t.getAll().then(function(data) {
       var card = data.card.shared; //Used for getting custom variables
-      
+
       return [
         {
           title: "Priority",
@@ -201,7 +150,7 @@ TrelloPowerUp.initialize({
           }
         },
         {
-          title: "Task Point",
+          title: "Task Estimate",
           text: card.taskpoint || "Set Task Estimate?",
           color: card.taskpoint ? null : "blue",
           callback: function(t) {
@@ -214,7 +163,7 @@ TrelloPowerUp.initialize({
         },
         {
           title: "Streak Counter",
-          text: card.count==undefined ?  "Count: 0" : ("Count: "+ card.count),
+          text: card.count == undefined ? "Count: 0" : "Count: " + card.count,
           color: null,
           callback: function(t) {
             return t.popup({
@@ -232,6 +181,18 @@ TrelloPowerUp.initialize({
             return t.popup({
               title: "Start Date",
               url: "https://trello-prototype.glitch.me/startdate.html",
+              target: "Trello Landing Page"
+            });
+          }
+        },
+        {
+          title: "Blocked Story",
+          text: card.cardName == undefined ? "Set Blocked Story?" : ("Card Blocked by " + card.cardName),
+          color: "red",
+          callback: function(t) {
+            return t.popup({
+              title: "Blocked Story",
+              url: "https://trello-prototype.glitch.me/blockedStory.html",
               target: "Trello Landing Page"
             });
           }
