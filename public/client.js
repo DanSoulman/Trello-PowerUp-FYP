@@ -1,7 +1,5 @@
 /* global TrelloPowerUp */
 
-var Promise = TrelloPowerUp.Promise;
-
 /*||---------||
   ||I C O N S|| 
   ||---------||*/
