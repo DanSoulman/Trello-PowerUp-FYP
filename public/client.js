@@ -3,12 +3,7 @@
 /*||---------||
   ||I C O N S|| 
   ||---------||*/
-var BLACK_ROCKET_ICON =
-  "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421";
-var GREY_ROCKET_ICON =
-  "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717";
-var WHITE_ROCKET_ICON =
-  "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182";
+//Allow the program to access the images in the assets section. 
 var CLOCK_ICON =
   "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FClock%204.2.png?v=1586190859641";
 var POINT_ICON =
@@ -19,7 +14,8 @@ var COUNTER_ICON =
   "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FCounter.png?v=1586193416033";
 var BLOCKED_ICON =
     "https://cdn.glitch.com/1a623816-70a1-42fc-bf8b-fd43e9e3210b%2FBlocked.png?v=1586797613534";
-TrelloPowerUp.initialize({
+
+TrelloPowerUp.initialize({  //Initialises the Power-Up features in use from the Library. 
   /*||----------------------------------------||
     ||  C  A  R  D     B  U  T  T  O  N  S    ||
     ||Appear on the right hand side of cards  ||
@@ -137,7 +133,7 @@ TrelloPowerUp.initialize({
       return [
         {
           title: "Priority",
-          text: card.priority || "Set Priortiy?",
+          text: card.priority || "Set Priority?",
           color: card.priority ? null : "blue",
           callback: function(t) {
             return t.popup({
@@ -149,7 +145,7 @@ TrelloPowerUp.initialize({
         },
         {
           title: "Task Estimate",
-          text: card.taskpoint || "Set Task Estimate?",
+          text: card.taskpoint == undefined ? "Set Task Estimate?" : card.taskpoint,
           color: card.taskpoint ? null : "blue",
           callback: function(t) {
             return t.popup({
@@ -173,7 +169,7 @@ TrelloPowerUp.initialize({
         },
         {
           title: "Start Date",
-          text: card.startdate || "Set Start Date?",
+          text: card.startdate == undefined ?"Set Start Date?": card.startdate,
           color: card.startdate ? null : "blue",
           callback: function(t) {
             return t.popup({

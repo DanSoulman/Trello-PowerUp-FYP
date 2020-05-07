@@ -1,5 +1,4 @@
 /* global TrelloPowerUp */
-
 var t = TrelloPowerUp.iframe();
 
 // Elements with IDs are available as properties of `window`.
